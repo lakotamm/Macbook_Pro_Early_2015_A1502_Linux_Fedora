@@ -39,3 +39,24 @@ Otherwise the comuper will not wake up from sleep.
 [applesmc-next](https://github.com/c---/applesmc-next)
 
 Especially useful with [Battery Health Charging](https://github.com/maniacx/Battery-Health-Charging/) Gnome extension.
+
+### Disabling mitigations
+`sudo grubby --update-kernel=ALL --args="mitigations=off"`
+It should increase performace by few % - at the cost of increased vulnerability of the system. It comes with no responsibility from my side.
+
+## How does it run?
+It took me several days to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there.
+
+### Power consumption
+Office work and writing text - around 9W
+Working with music - around 11W
+Idle with minimum light - around 7,5W.
+This is primarily limited by the CPU package, which cannot go below the C3 state, due to the SATA drive/driver not supporting SATA link power management.
+
+Without a SATA drive the CPU package can enter C6 state and it is possible to reach ca 6,5-6,7W consumption. 
+
+Disabling the Broadcom driver and relying on a more modern Wireless adapter allows a further decrease to around 6W.
+
+## Next steps:
+- Upgrade the wifi card using an adapter to AX210
+- Upgrade the SSD to NVME
