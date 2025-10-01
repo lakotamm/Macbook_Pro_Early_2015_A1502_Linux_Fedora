@@ -53,6 +53,7 @@ And enable using systemctl. Otherwise the comuper will not wake up from sleep.
 
 ### Service for reloading brcmfmac driver after sleep
 [brcmfmac-reload.service](brcmfmac-reload.service)
+
 The brcmfmac_wcc needs to be reloaded after every s2idle sleep and sometimes after deep sleep too. Otherwise it will stop working.
 
 Place it into: `/etc/systemd/system/brcmfmac-reload.service`
