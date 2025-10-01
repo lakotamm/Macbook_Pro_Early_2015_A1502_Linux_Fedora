@@ -25,7 +25,9 @@ By default, laptop will not be able to enter deep sleep, if the laptop goes to s
 - LID0 - ACPI call for lid
 - XHC1 - ACPI call for USB (such as keyboard).
 
-The laptop can still be woken up with a power button.
+Place it into: `/etc/systemd/system/suspend-fix.service`
+
+And enable using systemctl. The laptop can still be woken up with a power button.
 [A link for more information](https://askubuntu.com/a/1203159)
 
 ### FacetimeHD driver
@@ -44,7 +46,18 @@ And then it worked.
 
 ### Service for unloading of the facetimeHD driver before sleep and realoading it afterwards
 [facetimehd-reload.service](facetimehd-reload.service)
-Otherwise the comuper will not wake up from sleep.
+
+Place it into: `/etc/systemd/system/facetimehd-reload.service`
+
+And enable using systemctl. Otherwise the comuper will not wake up from sleep.
+
+### Service for reloading brcmfmac driver after sleep
+[brcmfmac-reload.service](brcmfmac-reload.service)
+The brcmfmac_wcc needs to be reloaded after every s2idle sleep and sometimes after deep sleep too. Otherwise it will stop working.
+
+Place it into: `/etc/systemd/system/brcmfmac-reload.service`
+
+And enable using systemctl.
 
 ### A patch for setting custom battery charge level
 [applesmc-next](https://github.com/c---/applesmc-next)
@@ -54,6 +67,23 @@ Especially useful with [Battery Health Charging](https://github.com/maniacx/Batt
 ### Disabling mitigations
 `sudo grubby --update-kernel=ALL --args="mitigations=off"`
 It should increase performace by few % - at the cost of increased vulnerability of the system. It comes with no responsibility from my side.
+
+### Getting H.264/AVC1 hardware decode support
+For some reason, the libva-intel-media-driver driver which Fedora comes with does not support H.264 decode on the iGPU.
+The solution which I came up with is to replace the driver with libva-intel-driver and libavcodec-freeworld from RPM Fusion repository
+
+
+[Configure RPM fusion] (https://rpmfusion.org/Configuration)
+
+`sudo dnf remove libva-intel-media-driver`
+
+`sudo dnf install libva-intel-driver`
+
+`sudo dnf install libavcodec-freeworld`
+
+
+Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration#Configure_VA-API_Video_decoding_on_Intel)
+
 
 ## How does it run?
 It took me several days to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there.
