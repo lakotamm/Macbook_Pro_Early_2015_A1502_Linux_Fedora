@@ -74,7 +74,7 @@ For some reason, the libva-intel-media-driver driver which Fedora comes with doe
 The solution which I came up with is to replace the driver with libva-intel-driver and libavcodec-freeworld from RPM Fusion repository
 
 
-[Configure RPM fusion] (https://rpmfusion.org/Configuration)
+[Configure RPM fusion](https://rpmfusion.org/Configuration)
 
 `sudo dnf remove libva-intel-media-driver`
 
