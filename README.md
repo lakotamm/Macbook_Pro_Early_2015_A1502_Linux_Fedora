@@ -54,7 +54,7 @@ And enable using systemctl. Otherwise the comuper will not wake up from sleep.
 ### Service for reloading brcmfmac driver after sleep
 [brcmfmac-reload.service](brcmfmac-reload.service)
 
-The brcmfmac_wcc needs to be reloaded after every s2idle sleep and sometimes after deep sleep too. Otherwise it will stop working.
+The `brcmfmac_wcc` driver needs to be reloaded after every s2idle sleep and sometimes after deep sleep too. Otherwise it will stop working.
 
 Place it into: `/etc/systemd/system/brcmfmac-reload.service`
 
@@ -70,8 +70,8 @@ Especially useful with [Battery Health Charging](https://github.com/maniacx/Batt
 It should increase performace by few % - at the cost of increased vulnerability of the system. It comes with no responsibility from my side.
 
 ### Getting H.264/AVC1 hardware decode support
-For some reason, the libva-intel-media-driver driver which Fedora comes with does not support H.264 decode on the iGPU.
-The solution which I came up with is to replace the driver with libva-intel-driver and libavcodec-freeworld from RPM Fusion repository
+For some reason, the `libva-intel-media-driver` driver which Fedora comes with does not support H.264 decode on the iGPU.
+The solution which I came up with is to replace the driver with `libva-intel-driver` and install `libavcodec-freeworld` from RPM Fusion repository
 
 
 [Configure RPM fusion](https://rpmfusion.org/Configuration)
@@ -82,12 +82,11 @@ The solution which I came up with is to replace the driver with libva-intel-driv
 
 `sudo dnf install libavcodec-freeworld`
 
-
 Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration#Configure_VA-API_Video_decoding_on_Intel)
 
 
 ## How does it run?
-It took me several days to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there.
+It took me several days to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there and Youtube is limited to 1080p with H.264.
 
 ### Power consumption
 - Office work and writing text - around 9W
