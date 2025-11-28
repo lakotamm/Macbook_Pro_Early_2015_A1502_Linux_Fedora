@@ -81,7 +81,9 @@ By default, if the FacetimeHD driver is at any point enabled, the camera module 
 
 ### Service disabling CPU cores before sleep and re-enabling them afterwards. 
 [cpu_sleep.service](cpu_sleep.service)
+
 [cpu_wake.service](cpu_wake.service)
+
 Disabling CPU cores before sleep will speed up a LOT wake up time from sleep. From 7s to 2s.
 
 Place them into: `/etc/systemd/system/cpu_sleep.service` and `/etc/systemd/system/cpu_wake.service`
@@ -95,6 +97,7 @@ Especially useful with [Battery Health Charging](https://github.com/maniacx/Batt
 
 ### Disabling mitigations
 `sudo grubby --update-kernel=ALL --args="mitigations=off"`
+
 It should increase performace by few % - at the cost of increased vulnerability of the system. It comes with no responsibility from my side.
 
 ### Getting H.264/AVC1 hardware decode support
