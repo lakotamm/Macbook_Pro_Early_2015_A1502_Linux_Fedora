@@ -112,6 +112,12 @@ The solution which I came up with is to replace the driver with `libva-intel-dri
 
 Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration#Configure_VA-API_Video_decoding_on_Intel)
 
+### An Easyeffects profile for Speakers 
+[Speakers.json](Speakers.json)
+
+[Easyeffects](https://github.com/wwmm/easyeffects)
+
+
 ## How does it run?
 It took me several weeks to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But since GNOME looses some frames here and there, I simply set it to 1080p resolution. This also helps improve battery life - which is otherwise good, but not when the GPU boosts to keep up with GNOME in 2.5k. With 1080p it is fine.
 
