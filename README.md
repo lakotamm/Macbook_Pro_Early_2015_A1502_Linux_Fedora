@@ -71,9 +71,9 @@ Place it into: `/etc/systemd/system/facetimehd-unload.service` and enable.
 
 By default, if the FacetimeHD driver is at any point enabled, the camera module will not enter power-saving state - even if the driver is unloaded, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
 
-1. Place the [facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh) file in '/usr/bin/facetimehd_aspm-tuning.sh'
+1. Place the [facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh) file in `/usr/bin/facetimehd_aspm-tuning.sh`
 
-2. Enable execution permission using 'sudo chmod +x /usr/bin/facetimehd_aspm-tuning.sh'
+2. Enable execution permission using `sudo chmod +x /usr/bin/facetimehd_aspm-tuning.sh`
 
 3. Place the [facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service) file in: `/etc/systemd/system/facetimehd_aspm-tuning.service`
 
