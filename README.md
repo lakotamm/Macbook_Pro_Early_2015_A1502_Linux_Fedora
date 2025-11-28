@@ -50,14 +50,22 @@ Place it into: `/etc/systemd/system/facetimehd-reload.service`
 
 And enable using systemctl. Otherwise the comuper will not wake up from sleep.
 
-### Service for reloading brcmfmac driver after sleep
-[brcmfmac-reload.service](brcmfmac-reload.service)
+### Service for enabling power-saving on camera module
+[facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service)
 
-The `brcmfmac_wcc` driver needs to be reloaded after every s2idle sleep and sometimes after deep sleep too. Otherwise it will stop working.
-
-Place it into: `/etc/systemd/system/brcmfmac-reload.service`
+By default, if the camera module is enabled, it is not in a power-saving state, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
+Place it into: `/etc/systemd/system/facetimehd_aspm-tuning.service`
 
 And enable using systemctl.
+
+### Service disabling CPU cores before sleep and re-enabling them afterwards. 
+[cpu_sleep.service](cpu_sleep.service)
+[cpu_wake.service](cpu_wake.service)
+Disabling CPU cores before sleep will speed up a LOT wake up time from sleep. From 7s to 2s.
+
+Place them into: `/etc/systemd/system/cpu_sleep.service` and `/etc/systemd/system/cpu_wake.service`
+
+And enable using systemctl. 
 
 ### A patch for setting custom battery charge level
 [applesmc-next](https://github.com/c---/applesmc-next)
