@@ -112,12 +112,10 @@ The solution which I came up with is to replace the driver with `libva-intel-dri
 
 Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration#Configure_VA-API_Video_decoding_on_Intel)
 
-
 ## How does it run?
-It took me several weeks to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there and Youtube is limited to 1080p with H.264.
+It took me several weeks to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But since GNOME looses some frames here and there, I simply set it to 1080p resolution. This also helps improve battery life - which is otherwise good, but not when the GPU boosts to keep up with GNOME in 2.5k. With 1080p it is fine.
 
-
-### Power consumption - with all the changes
+### Power consumption - with new SSD, AX210 and CPU reaching C7 states
 - Office work and writing text - around 8W
 - Working with music - around 10W
 - Idle with minimum light - around 6W
@@ -126,7 +124,3 @@ It took me several weeks to find all the tiny things preventing this laptop from
 - Office work and writing text - around 9W
 - Working with music - around 11W
 - Idle with minimum light - around 7,5W
-
-## Next steps:
-- Upgrade the wifi card using an adapter to AX210
-- Upgrade the SSD to NVME
