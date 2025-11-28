@@ -48,12 +48,14 @@ Second time it somehow worked straight after installation
 
 ### An app for manual toggling of FacetimeHD driver
 [facetimehd-toggle](https://github.com/Chamal1120/facetimehd-toggle)
+
 Having the FacetimeHD driver enabled means that the CPU cannot enter C6 and C7 power states. Solution?
 
 Blacklist it on startup and enable it only on demand using facetimehd-toggle.
 
 ### Service for automatically unloading of the facetimeHD driver before sleep
 [facetimehd-unload.service](facetimehd-unload.service)
+
 If you try to put the laptop to sleep with FacetimeHD driver loaded, you will realize that it never loads back. That is an issue. This service fixes it, because it automatically onloads the driver whenever the laptop goes to sleep.
 
 Place it into: `/etc/systemd/system/facetimehd-unload.service` and enable.
