@@ -3,7 +3,11 @@
 - i5-5287U
 - 16GB RAM
 - Samsung 980 500GB SSD
-- Intel AX210 Wifi module
+- Intel AX210 Wifi module 
+
+I chose to install a different SSD, because with the original Apple one, the CPU could not enter C6 and C7 states - becasue it did not support ASPM.
+
+And I went with an AX210 card with an adapter becasue the Broadcom module never really worked well.
 
 ## Operating system of choice:
 Fedora 43, Gnome 49
