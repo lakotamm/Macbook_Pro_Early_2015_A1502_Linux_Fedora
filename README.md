@@ -5,7 +5,7 @@
 - Samsung 980 500GB SSD
 - Intel AX210 Wifi module 
 
-I chose to install a different SSD, because with the original Apple one, the CPU could not enter C6 and C7 states - becasue it did not support ASPM.
+I chose to install a different SSD, because with the original Apple one, the CPU could not enter C6 and C7 states. This is supposedly because it did not support Link power management.
 
 And I went with an AX210 card with an adapter becasue the Broadcom module never really worked well.
 
@@ -64,14 +64,20 @@ If you try to put the laptop to sleep with FacetimeHD driver loaded, you will re
 
 Place it into: `/etc/systemd/system/facetimehd-unload.service` and enable.
 
-### Service for enabling power-saving on camera module
+### Service and script for enabling power-saving on the camera module
 [facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service)
+
+[facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh)
 
 By default, if the FacetimeHD driver is at any point enabled, the camera module will not enter power-saving state - even if the driver is unloaded, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
 
-Place it into: `/etc/systemd/system/facetimehd_aspm-tuning.service`
+1. Place the [facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh) file in '/usr/bin/facetimehd_aspm-tuning.sh'
 
-And enable using systemctl.
+2. Enable execution permission using 'sudo chmod +x /usr/bin/facetimehd_aspm-tuning.sh'
+
+3. Place the [facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service) file in: `/etc/systemd/system/facetimehd_aspm-tuning.service`
+
+3. Enable the service using systemctl.
 
 ### Service disabling CPU cores before sleep and re-enabling them afterwards. 
 [cpu_sleep.service](cpu_sleep.service)
@@ -108,18 +114,18 @@ Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceler
 
 
 ## How does it run?
-It took me several days to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there and Youtube is limited to 1080p with H.264.
+It took me several weeks to find all the tiny things preventing this laptop from running well. I would say that the performance is acceptable. The thing which stands out is the 2,5k screen and decent speakers in a laptop with a nice build quality, for - nowadays - a very affordable price. But GNOME looses some frames here and there and Youtube is limited to 1080p with H.264.
 
-### Power consumption
+
+### Power consumption - with all the changes
+- Office work and writing text - around 8W
+- Working with music - around 10W
+- Idle with minimum light - around 6W
+
+### Power consumption - with the original SSD and Broadcom WLAN
 - Office work and writing text - around 9W
 - Working with music - around 11W
-- Idle with minimum light - around 7,5W.
-
-This is primarily limited by the CPU package, which cannot go below the C3 state, due to the SATA drive/driver not supporting SATA link power management.
-
-Without a SATA drive the CPU package can enter C6 state and it is possible to reach ca 6,5-6,7W consumption. 
-
-Disabling the Broadcom driver and relying on a more modern Wireless adapter allows a further decrease to around 6W.
+- Idle with minimum light - around 7,5W
 
 ## Next steps:
 - Upgrade the wifi card using an adapter to AX210
