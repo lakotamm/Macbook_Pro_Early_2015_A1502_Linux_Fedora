@@ -112,10 +112,12 @@ The solution which I came up with is to replace the driver with `libva-intel-dri
 
 Source: [Fedora project](https://fedoraproject.org/wiki/Firefox_Hardware_acceleration#Configure_VA-API_Video_decoding_on_Intel)
 
-### An Easyeffects profile for Speakers 
+### An Easy Effects profile for built-in speakers 
 [Speakers.json](Speakers.json)
 
-[Easyeffects](https://github.com/wwmm/easyeffects)
+Probably not the best one, but will do it better than no equalizer.
+
+[Easy Effects](https://github.com/wwmm/easyeffects)
 
 
 ## How does it run?
