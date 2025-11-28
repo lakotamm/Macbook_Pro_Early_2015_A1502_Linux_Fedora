@@ -20,10 +20,9 @@ The values weren't super tested or tuned. The primary purpose is to makes sure t
 ### Service for disabling USB and Lid as wake up calls 
 [suspend-fix.service](suspend-fix.service)
 
-By default, laptop will not be able to enter deep sleep, if the laptop goes to sleep with lid open. 
+By default, laptop will not be able to enter deep sleep, if the laptop goes to sleep with lid open. Disable Lid switch as a wake up call
 
 - LID0 - ACPI call for lid
-- XHC1 - ACPI call for USB (such as keyboard).
 
 Place it into: `/etc/systemd/system/suspend-fix.service`
 
