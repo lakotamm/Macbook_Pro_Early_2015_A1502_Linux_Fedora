@@ -129,7 +129,7 @@ It took me several weeks to find all the tiny things preventing this laptop from
 ### Power consumption - with new SSD, AX210 and CPU reaching C7 states
 - Office work and writing text - around 8W
 - Working with music - around 10W
-- Idle with minimum light - around 6W
+- Idle with minimum light - around 5,5W
 
 ### Power consumption - with the original SSD and Broadcom WLAN
 - Office work and writing text - around 9W
