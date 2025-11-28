@@ -1,0 +1,7 @@
+[Unit]
+Description=Enable powersaving fot FacetimeHD camera
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/facetimehd_aspm-tuning.sh 
+[Install]
+WantedBy=multi-user.target
