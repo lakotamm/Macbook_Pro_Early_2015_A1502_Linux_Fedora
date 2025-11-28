@@ -2,10 +2,11 @@
 ## MacBookPro12,1
 - i5-5287U
 - 16GB RAM
-- 120GB SSD drive
+- Samsung 980 500GB SSD
+- Intel AX210 Wifi module
 
 ## Operating system of choice:
-Fedora 43 pre-release, Gnome 49
+Fedora 43, Gnome 49
 
 # What software did I use?
 ### TLP - using this [config](tlp.conf). 
@@ -34,7 +35,7 @@ And enable using systemctl. The laptop can still be woken up with a power button
 
 [Kmod packaging](https://discussion.fedoraproject.org/t/mulderje-intel-mac-rpms/130045)
 
-This was a finicky process. At first, after installing the firmware and facetimehd-kmod, the kernel was not detecting any peripherials. I had to:
+The first time it was a finicky process. At first, after installing the firmware and facetimehd-kmod, the kernel was not detecting any peripherials. I had to:
 - boot to an older verion of the kernel, uninstall facetimehd-kmod
 - install facetimehd-kmod again
 - remove akmod-facetimehd kmod-facetimehd-6.17.0-0.rc7.56.fc43.x86_64
@@ -43,19 +44,25 @@ This was a finicky process. At first, after installing the firmware and facetime
 
 And then it worked.
 
-### Service for unloading of the facetimeHD driver before sleep and realoading it afterwards
-[facetimehd-reload.service](facetimehd-reload.service)
+Second time it somehow worked straight after installation
 
-Place it into: `/etc/systemd/system/facetimehd-reload.service`
+### An app for manual toggling of FacetimeHD driver
+[facetimehd-toggle](https://github.com/Chamal1120/facetimehd-toggle)
+Having the FacetimeHD driver enabled means that the CPU cannot enter C6 and C7 power states. Solution?
 
-And enable using systemctl. Otherwise the comuper will not wake up from sleep.
+Blacklist it on startup and enable it only on demand using facetimehd-toggle.
+
+### Service for automatically unloading of the facetimeHD driver before sleep
+[facetimehd-unload.service](facetimehd-unload.service)
+If you try to put the laptop to sleep with FacetimeHD driver loaded, you will realize that it never loads back. That is an issue. This service fixes it, because it automatically onloads the driver whenever the laptop goes to sleep.
+
+Place it into: `/etc/systemd/system/facetimehd-unload.service` and enable.
 
 ### Service for enabling power-saving on camera module
 [facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service)
 
-By default, if the camera module is enabled, it is not in a power-saving state, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
+By default, if the FacetimeHD driver is at any point enabled, the camera module will not enter power-saving state - even if the driver is unloaded, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
 Place it into: `/etc/systemd/system/facetimehd_aspm-tuning.service`
-
 And enable using systemctl.
 
 ### Service disabling CPU cores before sleep and re-enabling them afterwards. 
