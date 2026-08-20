@@ -79,19 +79,12 @@ By default, if the FacetimeHD driver is at any point enabled, the camera module 
 
 3. Enable the service using systemctl.
 
-### Service disabling CPU cores before sleep and re-enabling them afterwards. 
-[cpu_sleep.service](cpu_sleep.service)
+### DELETED from previous version - Services disabling CPU cores before sleep and re-enabling them afterwards. 
+These are no longer needed in with kernel 7.1+. In fact they caused crashing during sleeping, because they shut down the cores before writing to NVME was finished.
 
-[cpu_wake.service](cpu_wake.service)
-
-Disabling CPU cores before sleep will speed up a LOT wake up time from sleep. From 7s to 2s.
-
-Place them into: `/etc/systemd/system/cpu_sleep.service` and `/etc/systemd/system/cpu_wake.service`
-
-And enable using systemctl. 
-
-### A patch for setting custom battery charge level
-[applesmc-next](https://github.com/c---/applesmc-next)
+### UPDATED - A patch for setting custom battery charge level
+[applesmc-next](https://github.com/netlinux-ai/applesmc-next)
+Us this fork from netlinux-ai to make it work with kernel 7.1+
 
 Especially useful with [Battery Health Charging](https://github.com/maniacx/Battery-Health-Charging/) Gnome extension.
 
