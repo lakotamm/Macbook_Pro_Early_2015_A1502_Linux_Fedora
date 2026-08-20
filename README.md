@@ -10,7 +10,7 @@ I chose to install a different SSD, because with the original Apple one, the CPU
 And I went with an AX210 card with an adapter becasue the Broadcom module never really worked well.
 
 ## Operating system of choice:
-Fedora 43, Gnome 49
+Fedora 44, Gnome 50
 
 # What software did I use?
 ### TLP - using this [config](tlp.conf). 
