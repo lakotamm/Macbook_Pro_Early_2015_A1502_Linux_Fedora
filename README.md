@@ -13,7 +13,7 @@ And I went with an AX210 card with an adapter becasue the Broadcom module never 
 Fedora 44, Gnome 50
 
 # What software did I use?
-### TLP - using this [config](tlp.conf). 
+### UPDATED - TLP - using this [config](tlp.conf). 
 Important notes: set it to use deep sleep both on AC and BAT, if you are using the original Broadcom adapter, otherwise you will need to restart the brcmfmac_wcc driver after sleep.
 
 ### Throttled - using this [config](throttled.conf). 
