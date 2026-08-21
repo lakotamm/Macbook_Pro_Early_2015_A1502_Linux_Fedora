@@ -34,21 +34,16 @@ Place it into: `/etc/systemd/system/suspend-fix.service`
 And enable using systemctl. The laptop can still be woken up with a power button.
 [A link for more information](https://askubuntu.com/a/1203159)
 
-### FacetimeHD driver
+### UPDATED - FacetimeHD driver
 [Firmware](https://github.com/patjak/facetimehd/wiki/Get-Started#firmware-extraction)
 
-[Kmod packaging](https://discussion.fedoraproject.org/t/mulderje-intel-mac-rpms/130045)
+And a wrapper to include it in the kernel:
+[facetimehd-dkms](https://copr.fedorainfracloud.org/coprs/frgt10/facetimehd-dkms/packages/)
 
-The first time it was a finicky process. At first, after installing the firmware and facetimehd-kmod, the kernel was not detecting any peripherials. I had to:
-- boot to an older verion of the kernel, uninstall facetimehd-kmod
-- install facetimehd-kmod again
-- remove akmod-facetimehd kmod-facetimehd-6.17.0-0.rc7.56.fc43.x86_64
-- Regenerate dracut `dracut --regenerate-all force`
-- install facetimehd-kmod one last time
+It should work well with the included instructions.
 
-And then it worked.
-
-Second time it somehow worked straight after installation
+It might be worth to regenerate dracut (which I believe the installer should do, but just in case):
+`sudo dracut --force --regenerate-all`
 
 ### An app for manual toggling of FacetimeHD driver
 [facetimehd-toggle](https://github.com/Chamal1120/facetimehd-toggle)
