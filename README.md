@@ -18,6 +18,14 @@ It is tested with kernel 7.1.8
 ### TLP - using this [config](tlp.conf). 
 Important notes: set it to use deep sleep both on AC and BAT, if you are using the original Broadcom adapter, otherwise you will need to restart the brcmfmac_wcc driver after sleep.
 
+Modes:
+
+Performance - Performance Governor, power saving disabled, will not enter C6/C7 states
+
+Balanced - Conservative governor, it has all energy saving settings turned on, it will enter C6/C7 states
+
+Power Saver - Same as Balanced, but it also has GPU and CPU frequency restrictions
+
 ### Throttled - using this [config](throttled.conf). 
 The primary purpose is to undervolt the cpu. If you can live with lover performance, feel free to decrease TDP, but in my case the CPU/iGPU performance already feels like it is on the limit when using Gnome.
 
@@ -39,8 +47,12 @@ And enable using systemctl. The laptop can still be woken up with a power button
 ### FacetimeHD driver, switching on/off the camera and power saving of the camera (ASPM)
 [lakotamm/facetimehd-toggle](https://github.com/lakotamm/facetimehd-toggle)
 
-
 I have set up a fork of facetimehd-toggle, and integrated into it both switching of the camera and ASPM - power saving options. These are important to set up well if you want to achieve C6/C7 idle states of the CPU
+
+This app will:
+- disable webcam during startup and before sleep
+- allow you to manually turn it on
+- automatically enable/disable ASPM/power saving of the webcam and PCIE bus.
 
 ### A patch for setting custom battery charge level
 [applesmc-next](https://github.com/netlinux-ai/applesmc-next)
