@@ -11,9 +11,10 @@ And I went with an AX210 card with an adapter becasue the Broadcom module never 
 
 ## Operating system of choice:
 Fedora 44, Gnome 50
+It is tested with kernel 7.1.8
 
 # What software did I use?
-### UPDATED - TLP - using this [config](tlp.conf). 
+### TLP - using this [config](tlp.conf). 
 Important notes: set it to use deep sleep both on AC and BAT, if you are using the original Broadcom adapter, otherwise you will need to restart the brcmfmac_wcc driver after sleep.
 
 ### Throttled - using this [config](throttled.conf). 
@@ -34,52 +35,17 @@ Place it into: `/etc/systemd/system/suspend-fix.service`
 And enable using systemctl. The laptop can still be woken up with a power button.
 [A link for more information](https://askubuntu.com/a/1203159)
 
-### UPDATED - FacetimeHD driver
-[Firmware](https://github.com/patjak/facetimehd/wiki/Get-Started#firmware-extraction)
+### FacetimeHD driver, switching on/off the camera and power saving of the camera (ASPM)
+[lakotamm/facetimehd-toggle](https://github.com/lakotamm/facetimehd-toggle)
 
-And a wrapper to include it in the kernel:
-[facetimehd-dkms](https://copr.fedorainfracloud.org/coprs/frgt10/facetimehd-dkms/packages/)
 
-It should work well with the included instructions.
+I have set up a fork of facetimehd-toggle, and integrated into it both switching of the camera and ASPM - power saving options. These are important to set up well if you want to achieve C6/C7 idle states of the CPU
 
-It might be worth to regenerate dracut (which I believe the installer should do, but just in case):
-`sudo dracut --force --regenerate-all`
-
-### An app for manual toggling of FacetimeHD driver
-[facetimehd-toggle](https://github.com/Chamal1120/facetimehd-toggle)
-
-Having the FacetimeHD driver enabled means that the CPU cannot enter C6 and C7 power states. Solution?
-
-Blacklist it on startup and enable it only on demand using facetimehd-toggle.
-
-### Service for automatically unloading of the facetimeHD driver before sleep
-[facetimehd-unload.service](facetimehd-unload.service)
-
-If you try to put the laptop to sleep with FacetimeHD driver loaded, you will realize that it never loads back. That is an issue. This service fixes it, because it automatically onloads the driver whenever the laptop goes to sleep.
-
-Place it into: `/etc/systemd/system/facetimehd-unload.service` and enable.
-
-### Service and script for enabling power-saving on the camera module
-[facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service)
-
-[facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh)
-
-By default, if the FacetimeHD driver is at any point enabled, the camera module will not enter power-saving state - even if the driver is unloaded, and as a result of that the CPU will not be able to enter C6 and C7 states. This service enables ASPM on the camera module and fixes the issue.
-
-1. Place the [facetimehd_aspm-tuning.sh](facetimehd_aspm-tuning.sh) file in `/usr/bin/facetimehd_aspm-tuning.sh`
-
-2. Enable execution permission using `sudo chmod +x /usr/bin/facetimehd_aspm-tuning.sh`
-
-3. Place the [facetimehd_aspm-tuning.service](facetimehd_aspm-tuning.service) file in: `/etc/systemd/system/facetimehd_aspm-tuning.service`
-
-3. Enable the service using systemctl.
-
-### DELETED from previous version - Services disabling CPU cores before sleep and re-enabling them afterwards. 
-These are no longer needed in with kernel 7.1+. In fact they caused crashing during sleeping, because they shut down the cores before writing to NVME was finished.
-
-### UPDATED - A patch for setting custom battery charge level
+### A patch for setting custom battery charge level
 [applesmc-next](https://github.com/netlinux-ai/applesmc-next)
-Us this fork from netlinux-ai to make it work with kernel 7.1+
+
+
+Use this fork from netlinux-ai to make it work with kernel 7.1+
 
 Especially useful with [Battery Health Charging](https://github.com/maniacx/Battery-Health-Charging/) Gnome extension.
 
