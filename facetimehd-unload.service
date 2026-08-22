@@ -1,9 +1,0 @@
-[Unit]
-Before=sleep.target
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash -c 'exec modprobe -r facetimehd'
-
-[Install]
-WantedBy=sleep.target
