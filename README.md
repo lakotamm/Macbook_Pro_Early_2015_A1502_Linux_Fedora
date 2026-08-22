@@ -11,6 +11,7 @@ And I went with an AX210 card with an adapter becasue the Broadcom module never 
 
 ## Operating system of choice:
 Fedora 44, Gnome 50
+
 It is tested with kernel 7.1.8
 
 # What software did I use?
